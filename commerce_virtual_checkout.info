@@ -1,0 +1,5 @@
+name = Commerce Virtual Checkout
+description = Provides the ability to checkout products on behalf of other people - useful for people buying product via phone.
+package = Commerce (contrib)
+dependencies[] = commerce
+core = 7.x

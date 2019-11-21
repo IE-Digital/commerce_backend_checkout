@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Provides menu items and settings to configure checkout pages
+ *
+ * This module provides forms that give backend staff the ability to buy
+ * products on behalf of other users.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_virtual_checkout_menu() {
+  $items = [];
+
+  $items['admin/commerce/config/virtual-checkout'] = [
+    'title' => 'Virtual checkout settings',
+    'description' => 'Configure how virtual checkout works.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['commerce_virtual_checkout_admin_form'],
+    'access arguments' => ['administer virtual_checkout settings'],
+    'file' => 'includes/commerce_virtual_checkout.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  $items['admin/commerce/virtual-checkout'] = [
+    'title' => 'Virtual checkout',
+    'description' => 'Allows you to checkout any products via the backend.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['commerce_virtual_checkout_form'],
+    'access arguments' => ['use virtual_checkout'],
+    'file' => 'includes/commerce_virtual_checkout.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function commerce_virtual_checkout_permission() {
+  return [
+    'administer virtual_checkout settings' => [
+      'title' => t('Administer commerce virtual checkout settings'),
+    ],
+    'use virtual_checkout' => [
+      'title' => t('Use commerce virtual checkout'),
+    ],
+  ];
+}
